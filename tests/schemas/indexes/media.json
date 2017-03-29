@@ -1,0 +1,60 @@
+{
+  "definitions": {
+    "picture": {
+      "type": "object",
+      "x-es-mapping": {
+        "properties": {
+          "title": {
+            "type": "string"
+          }
+        }
+      },
+      "x-allowed-mime-types": [
+        "text/plain"
+      ],
+      "required": [
+        "title"
+      ],
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "sys_filename": {
+          "type": "string",
+          "x-file": true
+        },
+        "sys_filesize": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "fileformat": {
+          "type": "string"
+        },
+        "resolution": {
+          "type": "object"
+        },
+        "size": {
+          "type": "object",
+          "properties": {
+            "X": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "Y": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "unit": {
+              "type": "string",
+              "enum": [
+                "Inch",
+                "CM",
+                "Pixel"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

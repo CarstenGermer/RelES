@@ -1,0 +1,72 @@
+{
+    "description": "Keys to this venue for several other data-providers",
+    "type": "object",
+    "properties": {
+        "google_places": {
+            "type": "object",
+            "properties": {
+                "ID": { "type": "string" }
+            }
+        },
+        "tripadvisor": {
+            "type": "object",
+            "properties": {
+                "URL": {
+                    "type": "string",
+                    "pattern": "^(https?|ftp):\/\/[^\\s/$.?#].[^\\s]*$"
+                },
+                "ID": { "type": "string" }
+            }
+        },
+        "yelp": {
+            "type": "object",
+            "properties": {
+                "URL": {
+                    "type": "string",
+                    "pattern": "^(https?|ftp):\/\/[^\\s/$.?#].[^\\s]*$"
+                },
+                "ID": { "type": "string" }
+            }
+        },
+        "facebook": {
+            "type": "object",
+            "properties": {
+                "URL": {
+                    "type": "string",
+                    "pattern": "^(https?|ftp):\/\/[^\\s/$.?#].[^\\s]*$"
+                },
+                "ID": { "type": "string" }
+            }
+        },
+        "googleplus": {
+            "type": "object",
+            "properties": {
+                "URL": {
+                    "type": "string",
+                    "pattern": "^(https?|ftp):\/\/[^\\s/$.?#].[^\\s]*$"
+                },
+                "ID": { "type": "string" }
+            }
+        },
+        "foursquare": {
+            "type": "object",
+            "properties": {
+                "URL": {
+                    "type": "string",
+                    "pattern": "^(https?|ftp):\/\/[^\\s/$.?#].[^\\s]*$"
+                },
+                "ID": { "type": "string" }
+            }
+        },
+        "bookatable": {
+            "type": "object",
+            "properties": {
+                "URL": {
+                    "type": "string",
+                    "pattern": "^(https?|ftp):\/\/[^\\s/$.?#].[^\\s]*$"
+                },
+                "ID": { "type": "string" }
+            }
+        }
+    }
+}

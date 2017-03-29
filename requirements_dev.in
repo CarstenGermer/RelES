@@ -1,0 +1,15 @@
+-r requirements.in
+
+docker-compose
+gevent
+gunicorn
+ipython
+isort
+mock
+pip-tools
+pylama
+pytest
+pytest-catchlog
+pytest-cov
+pytest-isort
+pytest-timeout

@@ -1,0 +1,110 @@
+{
+    "_default_": {
+        "date_detection": false,
+        "dynamic_templates": [
+            {
+                "language_de": {
+                    "match_mapping_type": "string",
+                    "match": "*_de",
+                    "mapping": {
+                        "type": "string",
+                        "analyzer": "german"
+                    }
+                }
+            },
+            {
+                "language_en": {
+                    "match_mapping_type": "string",
+                    "match": "*_en",
+                    "mapping": {
+                        "type": "string",
+                        "analyzer": "english"
+                    }
+                }
+            },
+            {
+                "language_fr": {
+                    "match_mapping_type": "string",
+                    "match": "*_fr",
+                    "mapping": {
+                        "type": "string",
+                        "analyzer": "french"
+                    }
+                }
+            },
+            {
+                "language_it": {
+                    "match_mapping_type": "string",
+                    "match": "*_it",
+                    "mapping": {
+                        "type": "string",
+                        "analyzer": "italian"
+                    }
+                }
+            },
+            {
+                "language_es": {
+                    "match_mapping_type": "string",
+                    "match": "*_es",
+                    "mapping": {
+                        "type": "string",
+                        "analyzer": "spanish"
+                    }
+                }
+            },
+            {
+                "language_ru": {
+                    "match_mapping_type": "string",
+                    "match": "*_ru",
+                    "mapping": {
+                        "type": "string",
+                        "analyzer": "russian"
+                    }
+                }
+            },
+            {
+                "language_dk": {
+                    "match_mapping_type": "string",
+                    "match": "*_dk",
+                    "mapping": {
+                        "type": "string",
+                        "analyzer": "danish"
+                    }
+                }
+            },
+            {
+                "language_se": {
+                    "match_mapping_type": "string",
+                    "match": "*_se",
+                    "mapping": {
+                        "type": "string",
+                        "analyzer": "swedish"
+                    }
+
+                }
+            },
+            {
+                "language_cz": {
+                    "match_mapping_type": "string",
+                    "match": "*_cz",
+                    "mapping": {
+                        "type": "string",
+                        "analyzer": "czech"
+                    }
+
+                }
+            },
+            {
+                "language_tr": {
+                    "match_mapping_type": "string",
+                    "match": "*_tr",
+                    "mapping": {
+                        "type": "string",
+                        "analyzer": "turkish"
+                    }
+
+                }
+            }
+        ]
+    }
+}

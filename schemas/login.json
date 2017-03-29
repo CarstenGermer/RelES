@@ -1,0 +1,61 @@
+{
+    "security": [],
+    "paths": {
+        "/login": {
+            "get": {
+                "parameters": [
+                    {
+                        "name": "cb",
+                        "in": "query",
+                        "description": "a callback to call with your token in the `auth` query parameter",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "your JWT",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/responses/unauthorized"
+                    },
+                    "default": {
+                        "$ref": "#/responses/genericError"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "errorModel": {
+            "type": "object",
+            "required": [
+                "message"
+            ],
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "errors": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    },
+    "responses": {
+        "unauthorized": {
+            "description": "The request has not been applied because it lacks valid authentication credentials for the target resource. (https://httpstatuses.com/401)",
+            "schema": {"$ref": "#/definitions/errorModel"}
+        },
+        "genericError": {
+            "description": "unexpected error",
+            "schema": {"$ref": "#/definitions/errorModel"}
+        }
+    }
+}

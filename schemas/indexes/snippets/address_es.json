@@ -1,0 +1,17 @@
+{
+    "dynamic": "strict",
+    "properties": {
+        "postal_address": {
+            "type": "string"
+        },
+        "administrative_areas": {
+            "type": "string"
+        },
+        "geo_point": {
+            "type": "geo_point"
+        },
+        "do_not_check": {
+            "type": "boolean"
+        }
+    }
+}

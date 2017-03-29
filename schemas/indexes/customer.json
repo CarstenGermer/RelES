@@ -1,0 +1,402 @@
+{
+    "x-es-index": {
+        "settings": {
+            "number_of_shards": 2,
+            "number_of_replicas": 1
+        },
+        "mappings": {
+            "$ref": "snippets/index_defmap_nodate_lang.json"
+        }
+    },
+    "definitions": {
+        "restaurants": {
+            "type": "object",
+            "required": [
+                "parent_venue"
+            ],
+            "x-es-mapping": {
+                "properties": {
+                    "reles": {
+                        "$ref": "snippets/reles_es.json"
+                    },
+                    "parent_venue": {
+                        "type": "string",
+                        "index": "not_analyzed",
+                        "fielddata": { "loading": "eager_global_ordinals" }
+                    },
+                    "local_cuisine_categories": {
+                        "type": "string",
+                        "index": "not_analyzed",
+                        "fielddata": { "loading": "eager_global_ordinals" }
+                    },
+                    "local_cuisine_names_de": {
+                        "type": "string"
+                    },
+                    "customer_rating": {
+                        "type": "object",
+                        "properties": {
+                            "rating": {
+                                "type": "integer"
+                            },
+                            "year": {
+                                "type": "date",
+                                "format": "yyyy"
+                            }
+                        }
+                    },
+                    "maincourse": {
+                        "type": "object",
+                        "properties": {
+                            "from": {
+                                "type": "float"
+                            },
+                            "to": {
+                                "type": "float"
+                            },
+                            "currency": {
+                                "type": "string",
+                                "index": "not_analyzed"
+                            },
+                            "currency_de": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "accepted_currencies": {
+                        "type": "string",
+                        "index": "not_analyzed"
+                    },
+                    "accepted_currencies_de": {
+                        "type": "string"
+                    },
+                    "accepted_paycards": {
+                        "type": "string",
+                        "index": "not_analyzed"
+                    },
+                    "accepted_paycards_de": {
+                        "type": "string"
+                    }
+                }
+            },
+            "properties": {
+                "reles": {
+                    "$ref": "snippets/reles_swa.json"
+                },
+                "parent_venue": {
+                    "type": "string",
+                    "format": "uuid",
+                    "x-fkey": {
+                        "index": "reles",
+                        "doc_type": "venues"
+                    },
+                    "description": "Pointer to /reles/venue this customers information is about."
+                },
+                "local_cuisine_categories": {
+                    "description": "FKEYs of local cuisines which are offered in this restaurant. With x-include-parents, parent categories are automatically filled in.",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "format": "uuid",
+                        "x-fkey": {
+                            "index": "categories",
+                            "doc_type": "cuisines"
+                        }
+                    },
+                    "x-include-parents": {
+                        "index": "categories",
+                        "doc_type": "cuisines",
+                        "parent_field": "entry_parent"
+                    }
+                },
+                "local_cuisine_names_de": {
+                    "description": "Autofilled: Names of local cuisines which are offered in this restaurant",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "x-fill-from-fkey": {
+                        "source": {
+                            "index": "categories",
+                            "doc_type": "cuisines",
+                            "field": "de"
+                        },
+                        "fkey_field": ".local_cuisine_categories"
+                    }
+                },
+                "customer_rating": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "rating": {
+                                "type": "integer",
+                                "format": "int32"
+                            },
+                            "year": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "maincourse": {
+                    "description": "Price (range) for main courses.",
+                    "type": "object",
+                    "properties": {
+                        "from": {
+                            "type": "number",
+                            "format": "float"
+                        },
+                        "to": {
+                            "type": "number",
+                            "format": "float"
+                        },
+                        "currency": {
+                            "type": "string",
+                            "format": "uuid",
+                            "x-fkey": {
+                                "index": "categories",
+                                "doc_type": "currencies"
+                            },
+                            "description": "Restaurants (main) currency to qualify the from/to ranges."
+                        },
+                        "currency_de": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            },
+                            "x-fill-from-fkey": {
+                                "source": {
+                                    "index": "categories",
+                                    "doc_type": "currencies",
+                                    "field": "de"
+                                },
+                                "fkey_field": ".currency"
+                            }
+                        }
+                    }
+                },
+                "accepted_currencies": {
+                    "description": "All accepted currencies for this restaurant.",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "format": "uuid",
+                        "x-fkey": {
+                            "index": "categories",
+                            "doc_type": "currencies"
+                        }
+                    }
+                },
+                "accepted_currencies_de": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "x-fill-from-fkey": {
+                        "source": {
+                            "index": "categories",
+                            "doc_type": "currencies",
+                            "field": "de"
+                        },
+                        "fkey_field": ".accepted_currencies"
+                    }
+                },
+                "accepted_paycards": {
+                    "description": "All accepted paycards for this restaurant.",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "format": "uuid",
+                        "x-fkey": {
+                            "index": "categories",
+                            "doc_type": "paycards"
+                        }
+                    }
+                },
+                "accepted_paycards_de": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "x-fill-from-fkey": {
+                        "source": {
+                            "index": "categories",
+                            "doc_type": "paycards",
+                            "field": "de"
+                        },
+                        "fkey_field": ".accepted_paycards"
+                    }
+                }
+            }
+        },
+        "articles": {
+            "type": "object",
+            "required": [
+                "parent_venue"
+            ],
+            "x-es-mapping": {
+                "properties": {
+                    "reles": {
+                        "$ref": "snippets/reles_es.json"
+                    },
+                    "parent_venue": {
+                        "type": "string",
+                        "index": "not_analyzed",
+                        "fielddata": { "loading": "eager_global_ordinals" }
+                    },
+                    "pictures": {
+                        "type": "string",
+                        "index": "not_analyzed",
+                        "fielddata": { "loading": "eager_global_ordinals" }
+                    },
+                    "print_de": {
+                        "properties": {
+                            "headline": {
+                                "type": "string"
+                            },
+                            "subheadline": {
+                                "type": "string"
+                            },
+                            "teaser": {
+                                "type": "string"
+                            },
+                            "text": {
+                                "type": "string"
+                            },
+                            "tags": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "web_de": {
+                        "properties": {
+                            "headline": {
+                                "type": "string"
+                            },
+                            "subheadline": {
+                                "type": "string"
+                            },
+                            "teaser": {
+                                "type": "string"
+                            },
+                            "text": {
+                                "type": "string"
+                            },
+                            "tags": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "snippet_de": {
+                        "properties": {
+                            "headline": {
+                                "type": "string"
+                            },
+                            "subheadline": {
+                                "type": "string"
+                            },
+                            "teaser": {
+                                "type": "string"
+                            },
+                            "text": {
+                                "type": "string"
+                            },
+                            "tags": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "shortmessage_de": {
+                        "properties": {
+                            "headline": {
+                                "type": "string"
+                            },
+                            "subheadline": {
+                                "type": "string"
+                            },
+                            "teaser": {
+                                "type": "string"
+                            },
+                            "text": {
+                                "type": "string"
+                            },
+                            "tags": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            },
+            "properties": {
+                "reles": {
+                    "$ref": "snippets/reles_swa.json"
+                },
+                "parent_venue": {
+                    "type": "string",
+                    "format": "uuid",
+                    "x-fkey": {
+                        "index": "reles",
+                        "doc_type": "venues"
+                    },
+                    "description": "Pointer to /reles/venue this customers article is about."
+                },
+                "pictures": {
+                    "description": "Pointer to pictures recommended to accompany this article",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "format": "uuid",
+                        "x-fkey": {
+                            "index": "media",
+                            "doc_type": "pictures"
+                        }
+                    }
+                },
+                "print_de": {
+                    "description": "Print version of the text for this article",
+                    "type": "object",
+                    "properties": {
+                        "headline": { "type": "string" },
+                        "subheadline": { "type": "string" },
+                        "teaser": { "type": "string" },
+                        "text": { "type": "string" },
+                        "tags": { "type": "string" }
+                    }
+                },
+                "web_de": {
+                    "description": "Web version of the text for this article",
+                    "type": "object",
+                    "properties": {
+                        "headline": { "type": "string" },
+                        "subheadline": { "type": "string" },
+                        "teaser": { "type": "string" },
+                        "text": { "type": "string" },
+                        "tags": { "type": "string" }
+                    }
+                },
+                "snippet_de": {
+                    "description": "Snippet version of the text for this article",
+                    "type": "object",
+                    "properties": {
+                        "headline": { "type": "string" },
+                        "subheadline": { "type": "string" },
+                        "teaser": { "type": "string" },
+                        "text": { "type": "string" },
+                        "tags": { "type": "string" }
+                    }
+                },
+                "shortmessage_de": {
+                    "description": "Shortmessage (twitter) version of the text for this article",
+                    "type": "object",
+                    "properties": {
+                        "headline": { "type": "string" },
+                        "subheadline": { "type": "string" },
+                        "teaser": { "type": "string" },
+                        "text": { "type": "string" },
+                        "tags": { "type": "string" }
+                    }
+                }
+            }
+        }
+    }
+}

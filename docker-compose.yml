@@ -1,0 +1,16 @@
+version: '2'
+services:
+  elasticsearch:
+    image: elasticsearch:5.1.1
+    command: elasticsearch
+    ports:
+      - "9200"
+      - "9300"
+    volumes:
+      - ./configs/elasticsearch:/usr/share/elasticsearch/config
+  postgresql:
+    image: postgres:9.3
+    ports:
+      - "5432"
+    environment:
+      POSTGRES_PASSWORD: mysecretpassword

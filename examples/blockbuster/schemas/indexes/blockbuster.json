@@ -1,0 +1,349 @@
+{
+    "x-es-index": {
+        "settings": {
+            "number_of_shards": 2,
+            "number_of_replicas": 1
+        },
+        "mappings": {
+            "_default_": {
+                "_all": { "enabled": false }
+            }
+        }
+    },
+    "definitions": {
+        "movie": {
+            "type": "object",
+            "x-unique-together": [
+                [
+                    "series_title",
+                    "series_part"
+                ]
+            ],
+            "required": [
+                "title"
+            ],
+            "x-es-mapping": {
+                "properties": {
+                    "title_de": {
+                        "type": "string",
+                        "analyzer": "german"
+                    },
+                    "series_title": {
+                        "index": "not_analyzed",
+                        "type": "string"
+                    },
+                    "series_part": {
+                        "type": "integer"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "genres": {
+                        "type": "string",
+                        "index": "not_analyzed"
+                    },
+                    "genres_expanded": {
+                        "type": "string",
+                        "index": "not_analyzed"
+                    }
+                }
+            },
+            "properties": {
+                "title_de": {
+                    "type": "string"
+                },
+                "genres": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "x-fkey": {
+                            "index": "blockbuster",
+                            "doc_type": "genre"
+                        }
+                    },
+                    "x-include-parents": {
+                        "index": "blockbuster",
+                        "doc_type": "genre",
+                        "parent_field": "parent"
+                    }
+                },
+                "title": {
+                    "type": "string"
+                },
+                "imdb_rating": {
+                    "minimum": 0,
+                    "type": "integer",
+                    "maximum": 10,
+                    "format": "int32"
+                },
+                "cover_image": {
+                    "x-fkey": {
+                        "index": "blockbuster",
+                        "doc_type": "picture"
+                    },
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "series_title": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "series_part": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            }
+        },
+        "genre": {
+            "required": [
+                "name"
+            ],
+            "type": "object",
+            "x-es-mapping": {
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "index": "not_analyzed"
+                    },
+                    "parent": {
+                        "type": "string",
+                        "index": "not_analyzed"
+                    }
+                }
+            },
+            "x-unique": [
+                "name"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "parent": {
+                    "type": "string",
+                    "x-fkey": {
+                        "index": "blockbuster",
+                        "doc_type": "genre"
+                    }
+                }
+            }
+        },
+        "blueray": {
+            "required": [
+                "movie_id"
+            ],
+            "type": "object",
+            "properties": {
+                "duallayer": {
+                    "type": "boolean"
+                },
+                "count_owned": {
+                    "type": "integer"
+                },
+                "region_code": {
+                    "enum": [
+                        "A",
+                        "B",
+                        "C",
+                        "ABC",
+                        "FREE"
+                    ],
+                    "type": "string"
+                },
+                "movie_id": {
+                    "x-fkey": {
+                        "index": "blockbuster",
+                        "doc_type": "movie"
+                    },
+                    "type": "string"
+                },
+                "movie": {
+                    "type": "object",
+                    "x-fill-from-fkey": {
+                        "fkey_field": "movie_id",
+                        "source": {
+                            "index": "blockbuster",
+                            "doc_type": "movie"
+                        }
+                    }
+                },
+                "cover_id": {
+                    "x-fkey": {
+                        "index": "blockbuster",
+                        "doc_type": "picture"
+                    },
+                    "type": "string"
+                },
+                "subtitles": {
+                    "items": {
+                        "pattern": "^[a-z]{2}(_[a-z]{2})?$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "rental": {
+            "required": [
+                "rented_by",
+                "rented_on",
+                "return_before"
+            ],
+            "type": "object",
+            "properties": {
+                "log": {
+                    "type": "object",
+                    "x-log-access": {
+                        "created": "created",
+                        "updated": "changed",
+                        "user": "editor",
+                        "customer": "customer"
+                    },
+                    "properties": {
+                        "created": {
+                            "type": "string",
+                            "format": "date-time"
+                        },
+                        "changed": {
+                            "type": "string",
+                            "format": "date-time"
+                        },
+                        "editor": {
+                            "type": "string",
+                            "format": "uuid",
+                            "x-fkey": {
+                                "index": "auth",
+                                "doc_type": "user"
+                            }
+                        },
+                        "customer": {
+                            "type": "string",
+                            "format": "uuid",
+                            "x-fkey": {
+                                "index": "auth",
+                                "doc_type": "customer"
+                            }
+                        }
+                    }
+                },
+                "returned_on": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "renter_email": {
+                    "type": "string",
+                    "x-fill-from-fkey": {
+                        "fkey_field": "rented_by",
+                        "source": {
+                            "index": "blockbuster",
+                            "doc_type": "user",
+                            "field": "email"
+                        }
+                    }
+                },
+                "rented_by": {
+                    "x-fkey": {
+                        "index": "blockbuster",
+                        "doc_type": "user"
+                    },
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "return_before": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "rented_on": {
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "user": {
+            "type": "object",
+            "required": [
+                "email",
+                "age"
+            ],
+            "x-es-mapping": {
+                "properties": {
+                    "email": {
+                        "index": "not_analyzed",
+                        "type": "string"
+                    }
+                }
+            },
+            "x-unique": [
+                "email"
+            ],
+            "properties": {
+                "age": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "id": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "place_of_residence": {
+                    "type": "object",
+                    "x-check-geolocation": {
+                        "address_field": "postal_address",
+                        "geopoint_field": "geo_point",
+                        "geopoint_deviation": 35,
+                        "override_field": "do_not_check"
+                    },
+                    "properties": {
+                        "postal_address": {
+                            "type": "string"
+                        },
+                        "administrative_areas": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "geo_point": {
+                            "type": "string"
+                        },
+                        "do_not_check": {
+                            "type": "boolean",
+                            "default": false
+                        }
+                    }
+                }
+            }
+        },
+        "picture": {
+            "type": "object",
+            "required": [
+                "title"
+            ],
+            "x-es-mapping": {
+                "properties": {
+                    "title": {
+                        "type": "string"
+                    }
+                }
+            },
+            "x-allowed-mime-types": [
+                "image/jpg",
+                "image/png"
+            ],
+            "properties": {
+                "sys_filename": {
+                    "type": "string",
+                    "x-file": true
+                },
+                "title": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

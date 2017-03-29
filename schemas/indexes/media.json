@@ -1,0 +1,217 @@
+{
+    "x-es-index": {
+        "settings": {
+            "number_of_shards": 2,
+            "number_of_replicas": 1
+        },
+        "mappings": {
+            "$ref": "snippets/index_defmap_nodate_lang.json"
+        }
+    },
+    "definitions": {
+        "pictures": {
+            "type": "object",
+            "x-es-mapping": {
+                "dynamic": "strict",
+                "properties": {
+                    "title": {
+                        "type": "string",
+                        "fielddata": {
+                            "loading": "eager"
+                        }
+                    },
+                    "title_alt": {
+                        "type": "string",
+                        "fielddata": {
+                            "loading": "eager"
+                        }
+                    },
+                    "description": {
+                        "type": "string",
+                        "fielddata": {
+                            "loading": "eager"
+                        }
+                    },
+                    "keywords": {
+                        "type": "string",
+                        "fielddata": {
+                            "loading": "eager"
+                        }
+                    },
+                    "production_date": {
+                        "type": "date"
+                    },
+                    "author": {
+                        "type": "string",
+                        "fielddata": {
+                            "loading": "eager"
+                        }
+                    },
+                    "rights_property": {
+                        "type": "string"
+                    },
+                    "rights_exploitation": {
+                        "type": "string"
+                    },
+                    "credit": {
+                        "type": "string"
+                    },
+                    "picture": {
+                        "properties": {
+                            "title": {
+                                "type": "string",
+                                "fielddata": {
+                                    "loading": "eager"
+                                }
+                            },
+                            "sys_filename": {
+                                "type": "string",
+                                "index": "not_analyzed"
+                            },
+                            "file_format": {
+                                "type": "string",
+                                "index": "not_analyzed",
+                                "fielddata": {
+                                    "loading": "eager_global_ordinals"
+                                }
+                            },
+                            "sys_sourceurl": {
+                                "type": "string",
+                                "index": "not_analyzed"
+                            },
+                            "resolution": {
+                                "properties": {
+                                    "PPI": {
+                                        "type": "long"
+                                    },
+                                    "DPI": {
+                                        "type": "long"
+                                    }
+                                }
+                            },
+                            "size": {
+                                "properties": {
+                                    "X": {
+                                        "type": "long"
+                                    },
+                                    "Y": {
+                                        "type": "long"
+                                    },
+                                    "unit": {
+                                        "type": "string",
+                                        "index": "not_analyzed"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "required": [
+                "title",
+                "credit"
+            ],
+            "x-allowed-mime-types": [
+                "image/jpg",
+                "image/jpeg",
+                "image/png",
+                "image/tiff"
+            ],
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "title_alt": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "keywords": {
+                    "type": "string"
+                },
+                "production_date": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "author": {
+                    "type": "string"
+                },
+                "rights_property": {
+                    "type": "string"
+                },
+                "rights_exploitation": {
+                    "type": "string"
+                },
+                "credit": {
+                    "type": "string"
+                },
+                "picture": {
+                    "type": "object",
+                    "required": [
+                        "title",
+                        "sys_filename"
+                    ],
+                    "properties": {
+                        "title": {
+                            "type": "string"
+                        },
+                        "sys_filename": {
+                            "type": "string",
+                            "x-file": true
+                        },
+                        "sys_sourceurl": {
+                            "type": "string",
+                            "pattern": "^(https?|ftp):\/\/[^\\s/$.?#].[^\\s]*$"
+                        },
+                        "file_format": {
+                            "type": "string",
+                            "enum": [
+                                "JPG",
+                                "PNG",
+                                "TIFF"
+                            ]
+                        },
+                        "resolution": {
+                            "type": "object",
+                            "properties": {
+                                "PPI": {
+                                    "type": "integer",
+                                    "format": "int64"
+                                },
+                                "DPI": {
+                                    "type": "integer",
+                                    "format": "int64"
+                                }
+                            }
+                        },
+                        "size": {
+                            "type": "object",
+                            "required": [
+                                "unit"
+                            ],
+                            "properties": {
+                                "X": {
+                                    "type": "integer",
+                                    "format": "int64"
+                                },
+                                "Y": {
+                                    "type": "integer",
+                                    "format": "int64"
+                                },
+                                "unit": {
+                                    "type": "string",
+                                    "enum": [
+                                        "Inch",
+                                        "CM",
+                                        "Pixel"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

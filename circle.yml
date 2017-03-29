@@ -1,0 +1,31 @@
+machine:
+  environment:
+    AUTH_JWT_SECRET: ohn5puV4doF0too1shi7aequ
+    DEBUG: true
+    ELASTICSEARCH_HOST: localhost:39200
+    HOSTNAME: reles.ci
+    DATABASE_URL: postgres://reles:quuLoowai0huuphu@localhost:35432/reles
+    TESTING: true
+  hosts:
+    api.reles.ci: 127.0.0.1
+    reles.ci: 127.0.0.1
+  python:
+    version: 2.7.10
+  services:
+     - docker
+
+test:
+  override:
+    - py.test --verbose --junit-xml=${CIRCLE_TEST_REPORTS}/pytest.xml --cov=reles tests
+
+database:
+  pre:
+    - docker run --publish=39200:9200 --detach --volume="$PWD/configs/elasticsearch":/usr/share/elasticsearch/config levlaz/elasticsearch-docker-ci:5.1.1
+    - docker run --publish=35432:5432 --detach --env=POSTGRES_USER=reles --env=POSTGRES_PASSWORD=quuLoowai0huuphu postgres:9.3
+    - sleep 5; docker ps
+
+dependencies:
+  pre:
+    - pip install --upgrade pip pip-tools
+  override:
+    - pip-sync requirements_dev.txt

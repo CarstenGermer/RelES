@@ -1,0 +1,75 @@
+{
+    "description": "Detailed Name information for an entity",
+    "required": [
+        "officialname"
+    ],
+   "type": "object",
+    "properties": {
+        "officialname": {
+            "type": "string"
+        },
+        "sortname": {
+            "type": "string"
+        },
+        "alternate_names_de": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "alternate_names_en": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "alternate_names_fr": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "alternate_names_it": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "alternate_names_es": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "alternate_names_ru": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "alternate_names_dk": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "alternate_names_se": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "alternate_names_cz": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "alternate_names_tr": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        }
+    }
+}

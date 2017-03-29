@@ -1,0 +1,67 @@
+languages,Deutsch,German,!,DE
+languages,Englisch,English,!,EN
+languages,Französisch,French,!,FR
+languages,Italienisch,Italian,!,IT
+languages,Spanisch,Spanish,!,ES
+languages,Russisch,Russian,!,RU
+languages,Dänisch,Danish,!,DK
+languages,Schwedisch,Swedish,!,SV
+languages,Tschechish,Czech,!,CS
+languages,Türkisch,Turkish,!,TR
+currencies,Euro,Euro,!,EUR
+currencies,Japanischer Yen,Japan Yen,!,JPY
+currencies,US-Dollar,US-Dollar,!,USD
+currencies,Rubel,Rubel,!,RUB
+currencies,Chinesischer Renminbi,Chinese Renminbi,!,CNY
+currencies,Albanischer Lek,Albanian Lek,!,ALL
+currencies,Bosnien und Herzegovina konvertible Mark,Bosnia and Herzegovina convertible Mark,!,BAM
+currencies,Bulgarischer Lew,Bulgarian Lev,!,BGN
+currencies,Kroatische Kuna,Croatian Kuna,!,HRK
+currencies,Dänische Krone,Danish Crown,!,DKK
+currencies,Ungarische Forint,Hungarian Forint,!,HUF
+currencies,Isländische Krone,Icelandic Crown,!,ISK
+currencies,Schweizer Franken,Swiss Franc,!,CHF
+currencies,Zweiter Mazedonischer Dinar,Second Macedonian Denar,!,MKD
+currencies,Plonische Sloty,Polish Zloty,!,PLN
+currencies,Schwedische Krone,Swedish Crown,!,SEK
+currencies,Ukrainischer Hryvnia,Ukrainian Hryvnia,!,UAH
+currencies,Pfund Sterling,Pound Sterling,!,GBP
+currencies,Tschechische Krone,Czech Koruna,!,CZK
+currencies,Romänischer Leu,Romanian Leu,!,RON
+paycards,American Express,,!,Amex
+paycards,Diners Club,,!,Diners
+paycards,Mastercard,,!,Master
+paycards,Visa,,!,Visa
+paycards,Discover,,!,Discover
+paycards,Eurocard,,!,EC
+paycards,Japan Credit Bureau,,!,JCB
+cuisines,Italienisch,Italian,!,ITA
+cuisines,Französisch,French,!,FRA
+cuisines,Spanisch,Spanish,!,ESP
+cuisines,Chinesisch,Chinese,!,CHN
+cuisines,Japanisch,Japanese,!,JPA
+cuisines,Vietnamesisch,Vietnamese,!,VNM
+cuisines,Koreanisch,Korean,!,KOR
+cuisines,Thailändisch,Thai,!,THA
+cuisines,Asiatisch,Asian,!,ASIAN
+cuisines,Nordisch,Nordic,!,NORDIC
+cuisines,Mediterran,Mediterranean,!,MEDITERRAN
+cuisines,Orientalisch,Oriental,!,ORIENT
+cuisines,Griechisch,Greek,!,GRC
+cuisines,Nordamerikanisch,Northamerican,!,NAM
+cuisines,Deutsch,German,<,DEU
+cuisines,Badisch,,>,DEU-BAD
+cuisines,Bayerisch,,>,DEU-BAY
+cuisines,Berliner,,>,DEU-BER
+cuisines,Brandenburger,,>,DEU-BRA
+cuisines,Bremer,,>,DEU-BRE
+cuisines,Fränkisch,,>,DEU-FRA
+cuisines,Hamburger,,>,DEU-HAM
+cuisines,Hessisch,,>,DEU-HES
+cuisines,Mecklenburger,,>,DEU-MVL
+cuisines,Niedersächsisch,,>,DEU-NDS
+cuisines,Pfälzer,,>,DEU-PFA
+cuisines,Rheinisch,,>,DEU-RHEIN
+cuisines,Sächsisch,,>,DEU-SACHS
+cuisines,Schwäbisch,,>,DEU-SCHWA
+cuisines,Westfälisch,,>,DEU-WESTF

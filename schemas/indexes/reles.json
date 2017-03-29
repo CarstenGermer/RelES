@@ -1,0 +1,71 @@
+{
+    "x-es-index": {
+        "settings": {
+            "number_of_shards": 2,
+            "number_of_replicas": 1
+        },
+        "mappings": {
+            "$ref": "snippets/index_defmap_nodate_lang.json"
+        }
+    },
+    "definitions": {
+        "venues": {
+            "description": "Undisputable information about a venue.",
+            "type": "object",
+            "required": [
+                "entityname",
+                "address",
+                "contact"
+            ],
+            "x-es-mapping": {
+                "dynamic": "strict",
+                "properties": {
+                    "reles": {
+                        "$ref": "snippets/reles_es.json"
+                    },
+                    "entityname": {
+                        "$ref": "snippets/entityname_es.json"
+                    },
+                    "address": {
+                        "$ref": "snippets/address_es.json"
+                    },
+                    "contact": {
+                        "$ref": "snippets/contactdata_es.json"
+                    },
+                    "part_of_venues": {
+                        "type": "string"
+                    }
+                }
+            },
+            "properties": {
+                "reles": {
+                    "$ref": "snippets/reles_swa.json",
+                    "description": "General subobject for administrative information. Fieldnames from this snippet are filled automatically."
+                },
+                "entityname": {
+                    "$ref": "snippets/entityname_swa.json",
+                    "description": "General unified subobject for an entityname."
+                },
+                "address": {
+                    "$ref": "snippets/address_swa.json",
+                    "description": "General unified subobject for adresses."
+                },
+                "contact": {
+                    "$ref": "snippets/contactdata_swa.json",
+                    "description": "General unified subobject for contact information."
+                },
+                "part_of_venues": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "x-fkey": {
+                            "index": "reles",
+                            "doc_type": "venues"
+                        }
+                    },
+                    "description": "Which other (larger) venues this venue is part of."
+                }
+            }
+        }
+    }
+}

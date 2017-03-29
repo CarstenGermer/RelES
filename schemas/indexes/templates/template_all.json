@@ -1,0 +1,7 @@
+{
+  "template": "*",
+  "order":0,
+  "settings": {
+    "index.mapper.dynamic": false
+  }
+}

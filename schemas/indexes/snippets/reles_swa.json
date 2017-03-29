@@ -1,0 +1,37 @@
+{
+
+    "description": "Core administrative information. This data is automatically filled.",
+    "type": "object",
+    "x-log-access": {
+        "created": "created",
+        "updated": "changed",
+        "user": "editor",
+        "customer": "customer"
+    },
+    "properties": {
+        "created": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "changed": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "editor": {
+            "type": "string",
+            "format": "uuid",
+            "x-fkey": {
+                "index": "auth",
+                "doc_type": "user"
+            }
+        },
+        "customer": {
+            "type": "string",
+            "format": "uuid",
+            "x-fkey": {
+                "index": "auth",
+                "doc_type": "customer"
+            }
+        }
+    }
+}

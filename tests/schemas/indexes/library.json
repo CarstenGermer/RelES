@@ -1,0 +1,125 @@
+{
+  "definitions": {
+    "award": {
+      "type": "object",
+      "required": [
+        "title"
+      ],
+      "x-es-mapping": {
+        "properties": {
+          "title": {
+            "type": "string"
+          }
+        }
+      },
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "author": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "x-es-mapping": {
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "awards": {
+            "type": "string"
+          }
+        }
+      },
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "name": {
+            "type": "string"
+        },
+        "awards": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-fkey": {
+              "index": "library",
+              "doc_type": "award"
+            }
+          }
+        }
+      }
+    },
+    "book": {
+      "type": "object",
+      "x-es-mapping": {
+        "properties": {
+          "author": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "title"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "title": {
+          "type": "string"
+        },
+        "author": {
+          "type": "string",
+          "x-fkey": {
+            "index": "library",
+            "doc_type": "author"
+          }
+        }
+      }
+    },
+    "series": {
+      "type": "object",
+      "required": [
+        "title",
+        "books"
+      ],
+      "x-es-mapping": {
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "books": {
+            "type": "string"
+          }
+        }
+      },
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "books": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-fkey": {
+              "index": "library",
+              "doc_type": "book"
+            }
+          }
+        }
+      }
+    }
+  }
+}

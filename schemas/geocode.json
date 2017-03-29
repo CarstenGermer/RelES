@@ -1,0 +1,85 @@
+{
+    "security": [
+        {"jwt": []}
+    ],
+    "definitions": {
+        "address": {
+            "type": "object",
+            "properties": {
+                "formatted_address": {"type": "string"},
+                "administrative_areas": {
+                    "type": "array",
+                    "items": {"type": "string"}
+                },
+                "lat": {"type": "number"},
+                "lon": {"type": "number"}
+            }
+        },
+        "errorModel": {
+            "type": "object",
+            "required": [
+                "message"
+            ],
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "errors": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    },
+    "paths": {
+        "/geocode": {
+            "get": {
+                "parameters": [
+                    {
+                        "name": "address",
+                        "in": "query",
+                        "description": "the address that is to be normalized",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "the address was successfully resolved",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/address"
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/responses/unauthorized"
+                    },
+                    "default": {
+                        "$ref": "#/responses/genericError"
+                    }
+                }
+            }
+        }
+    },
+    "responses": {
+        "unauthorized": {
+            "description": "The request has not been applied because it lacks valid authentication credentials for the target resource. (https://httpstatuses.com/401)",
+            "schema": {"$ref": "#/definitions/errorModel"}
+        },
+        "genericError": {
+            "description": "unexpected error",
+            "schema": {"$ref": "#/definitions/errorModel"}
+        }
+    },
+    "securityDefinitions": {
+        "jwt": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    }
+}

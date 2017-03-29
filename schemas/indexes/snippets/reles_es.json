@@ -1,0 +1,16 @@
+{
+    "dynamic": "strict",
+    "properties": {
+        "created": { "type": "date" },
+        "changed": { "type": "date" },
+        "editor": {
+            "type": "string",
+            "index": "not_analyzed"
+        },
+        "customer": {
+            "type": "string",
+            "index": "not_analyzed"
+        }
+    }
+}
+

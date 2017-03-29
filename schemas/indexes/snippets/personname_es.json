@@ -1,0 +1,18 @@
+{
+    "dynamic": "strict",
+    "properties": {
+        "first_names": {
+            "type": "string"
+        },
+        "family_names": {
+            "type": "string"
+        },
+        "honorable_titles": {
+            "type": "string"
+        },
+        "artist_names": {
+            "type": "string"
+        },
+        "official_fully_written": { "type": "string" }
+    }
+}

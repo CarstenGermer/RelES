@@ -1,0 +1,98 @@
+{
+    "description": "Detailed information about how to contact",
+    "type": "object",
+    "properties": {
+        "phones": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "description": {
+                        "type": "string"
+                    },
+                    "number": {
+                        "type": "string",
+                        "pattern": "^[+]?([0-9]*[\\.\\s\\-\\(\\)]|[0-9]+){3,24}$"
+                    }
+                }
+            }
+        },
+        "faxes": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "description": {
+                        "type": "string"
+                    },
+                    "number": {
+                        "type": "string",
+                        "pattern": "^[+]?([0-9]*[\\.\\s\\-\\(\\)]|[0-9]+){3,24}$"
+                    }
+                }
+            }
+        },
+        "emails": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "description": {
+                        "type": "string"
+                    },
+                    "address": {
+                        "type": "string",
+                        "pattern": "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$"
+                    }
+                }
+            }
+        },
+        "messenger": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "description": {
+                        "type": "string"
+                    },
+                    "ID": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "socialsites": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "description": {
+                        "type": "string"
+                    },
+                    "URL": {
+                        "type": "string",
+                        "pattern": "^(https?|ftp):\/\/[^\\s/$.?#].[^\\s]*$"
+                    },
+                    "ID": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "webpages": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "description": {
+                        "type": "string"
+                    },
+                    "URL": {
+                        "type": "string",
+                        "pattern": "^(https?|ftp):\/\/[^\\s/$.?#].[^\\s]*$"
+                    }
+                }
+            }
+        }
+    }
+}

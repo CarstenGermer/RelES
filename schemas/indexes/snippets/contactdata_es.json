@@ -1,0 +1,48 @@
+{
+    "dynamic": "strict",
+    "properties": {
+        "phones": {
+            "type": "object",
+            "properties" : {
+                "description": { "type": "string" },
+                "number": { "type": "string" }
+            }
+        },
+        "faxes": {
+            "type": "object",
+            "properties" : {
+                "description": { "type": "string" },
+                "number": { "type": "string" }
+            }
+        },
+        "emails": {
+            "type": "object",
+            "properties" : {
+                "description": { "type": "string" },
+                "address": { "type": "string" }
+            }
+        },
+        "messenger": {
+            "type": "object",
+            "properties" : {
+                "description": { "type": "string" },
+                "ID": { "type": "string" }
+            }
+        },
+        "socialsites": {
+            "type": "object",
+            "properties" : {
+                "description": { "type": "string" },
+                "URL": { "type": "string" },
+                "ID": { "type": "string" }
+            }
+        },
+        "webpages": {
+            "type": "object",
+            "properties" : {
+                "description": { "type": "string" },
+                "URL": { "type": "string" }
+            }
+        }
+    }
+}

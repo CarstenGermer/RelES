@@ -1,0 +1,33 @@
+{
+    "type": "object",
+    "required": [
+        "officialname"
+    ],
+    "properties": {
+        "first_names": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "family_names": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "honorable_titles": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "artist_names": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "official_fully_written": { "type": "string" }
+    }
+}

@@ -1,0 +1,30 @@
+{
+    "description": "Detailed address information",
+    "type": "object",
+    "required": [
+        "postal_address"
+    ],
+    "x-check-geolocation": {
+        "address_field": "postal_address",
+        "geopoint_field": "geo_point",
+        "override_field": "do_not_check"
+    },
+    "properties": {
+        "postal_address": {
+            "type": "string"
+        },
+        "administrative_areas": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "geo_point": {
+            "type": "string"
+        },
+        "do_not_check": {
+            "type": "boolean",
+            "default": false
+        }
+    }
+}

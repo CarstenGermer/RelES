@@ -1,0 +1,501 @@
+{
+    "x-es-index": {
+        "settings": {
+            "number_of_shards": 2,
+            "number_of_replicas": 1
+        },
+        "mappings": {
+            "$ref": "snippets/index_defmap_nodate_lang.json"
+        }
+    },
+    "definitions": {
+        "currencies": {
+            "type": "object",
+            "x-es-mapping": {
+                "properties": {
+                    "ru": {
+                        "type": "string",
+                        "analyzer": "russian"
+                    },
+                    "fr": {
+                        "type": "string",
+                        "analyzer": "french"
+                    },
+                    "en": {
+                        "type": "string",
+                        "analyzer": "english"
+                    },
+                    "entry_parent": {
+                        "index": "not_analyzed",
+                        "type": "string"
+                    },
+                    "code": {
+                        "type": "string",
+                        "index": "not_analyzed"
+                    },
+                    "de": {
+                        "type": "string",
+                        "analyzer": "german"
+                    },
+                    "it": {
+                        "type": "string",
+                        "analyzer": "italian"
+                    },
+                    "cz": {
+                        "type": "string",
+                        "analyzer": "czech"
+                    },
+                    "es": {
+                        "type": "string",
+                        "analyzer": "spanish"
+                    },
+                    "se": {
+                        "type": "string",
+                        "analyzer": "spanish"
+                    },
+                    "dk": {
+                        "type": "string",
+                        "analyzer": "danish"
+                    },
+                    "tr": {
+                        "type": "string",
+                        "analyzer": "turkish"
+                    }
+                }
+            },
+            "properties": {
+                "ru": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "fr": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "en": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "entry_parent": {
+                    "x-fkey": {
+                        "index": "categories",
+                        "doc_type": "currencies"
+                    },
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "code": {
+                    "type": "string"
+                },
+                "de": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "it": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "cz": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "es": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "dk": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "tr": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "paycards": {
+            "type": "object",
+            "x-es-mapping": {
+                "properties": {
+                    "ru": {
+                        "type": "string",
+                        "analyzer": "russian"
+                    },
+                    "fr": {
+                        "type": "string",
+                        "analyzer": "french"
+                    },
+                    "en": {
+                        "type": "string",
+                        "analyzer": "english"
+                    },
+                    "entry_parent": {
+                        "index": "not_analyzed",
+                        "type": "string"
+                    },
+                    "code": {
+                        "type": "string",
+                        "index": "not_analyzed"
+                    },
+                    "de": {
+                        "type": "string",
+                        "analyzer": "german"
+                    },
+                    "it": {
+                        "type": "string",
+                        "analyzer": "italian"
+                    },
+                    "cz": {
+                        "type": "string",
+                        "analyzer": "czech"
+                    },
+                    "es": {
+                        "type": "string",
+                        "analyzer": "spanish"
+                    },
+                    "se": {
+                        "type": "string",
+                        "analyzer": "spanish"
+                    },
+                    "dk": {
+                        "type": "string",
+                        "analyzer": "danish"
+                    },
+                    "tr": {
+                        "type": "string",
+                        "analyzer": "turkish"
+                    }
+                }
+            },
+            "properties": {
+                "ru": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "fr": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "en": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "entry_parent": {
+                    "x-fkey": {
+                        "index": "categories",
+                        "doc_type": "paycards"
+                    },
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "code": {
+                    "type": "string"
+                },
+                "de": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "it": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "cz": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "es": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "dk": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "tr": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            }
+        }, 
+        "cuisines": {
+            "type": "object",
+            "x-es-mapping": {
+                "properties": {
+                    "ru": {
+                        "type": "string",
+                        "analyzer": "russian"
+                    },
+                    "fr": {
+                        "type": "string",
+                        "analyzer": "french"
+                    },
+                    "en": {
+                        "type": "string",
+                        "analyzer": "english"
+                    },
+                    "entry_parent": {
+                        "index": "not_analyzed",
+                        "type": "string"
+                    },
+                    "code": {
+                        "type": "string",
+                        "index": "not_analyzed"
+                    },
+                    "de": {
+                        "type": "string",
+                        "analyzer": "german"
+                    },
+                    "it": {
+                        "type": "string",
+                        "analyzer": "italian"
+                    },
+                    "cz": {
+                        "type": "string",
+                        "analyzer": "czech"
+                    },
+                    "es": {
+                        "type": "string",
+                        "analyzer": "spanish"
+                    },
+                    "se": {
+                        "type": "string",
+                        "analyzer": "spanish"
+                    },
+                    "dk": {
+                        "type": "string",
+                        "analyzer": "danish"
+                    },
+                    "tr": {
+                        "type": "string",
+                        "analyzer": "turkish"
+                    }
+                }
+            },
+            "properties": {
+                "ru": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "fr": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "en": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "entry_parent": {
+                    "x-fkey": {
+                        "index": "categories",
+                        "doc_type": "cuisines"
+                    },
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "code": {
+                    "type": "string"
+                },
+                "de": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "it": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "cz": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "es": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "dk": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "tr": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "languages": {
+            "type": "object",
+            "x-es-mapping": {
+                "properties": {
+                    "ru": {
+                        "type": "string",
+                        "analyzer": "russian"
+                    },
+                    "fr": {
+                        "type": "string",
+                        "analyzer": "french"
+                    },
+                    "en": {
+                        "type": "string",
+                        "analyzer": "english"
+                    },
+                    "entry_parent": {
+                        "index": "not_analyzed",
+                        "type": "string"
+                    },
+                    "code": {
+                        "type": "string",
+                        "index": "not_analyzed"
+                    },
+                    "de": {
+                        "type": "string",
+                        "analyzer": "german"
+                    },
+                    "it": {
+                        "type": "string",
+                        "analyzer": "italian"
+                    },
+                    "cz": {
+                        "type": "string",
+                        "analyzer": "czech"
+                    },
+                    "es": {
+                        "type": "string",
+                        "analyzer": "spanish"
+                    },
+                    "se": {
+                        "type": "string",
+                        "analyzer": "spanish"
+                    },
+                    "dk": {
+                        "type": "string",
+                        "analyzer": "danish"
+                    },
+                    "tr": {
+                        "type": "string",
+                        "analyzer": "turkish"
+                    }
+                }
+            },
+            "properties": {
+                "ru": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "fr": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "en": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "entry_parent": {
+                    "x-fkey": {
+                        "index": "categories",
+                        "doc_type": "languages"
+                    },
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "code": {
+                    "type": "string"
+                },
+                "de": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "it": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "cz": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "es": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "dk": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "tr": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            }
+        }
+    }
+}

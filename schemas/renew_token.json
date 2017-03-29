@@ -1,0 +1,47 @@
+{
+    "security": [
+        {"jwt": []}
+    ],
+    "paths": {
+        "/renew_token": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "the renewed token",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/genericError"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "errorModel": {
+            "type": "object",
+            "required": [
+                "message"
+            ],
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "errors": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    },
+    "responses": {
+        "genericError": {
+            "description": "unexpected error",
+            "schema": {"$ref": "#/definitions/errorModel"}
+        }
+    }
+}

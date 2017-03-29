@@ -1,0 +1,56 @@
+{
+    "security": [
+        {"jwt": []}
+    ],
+    "paths": {
+        "/select_customer": {
+            "get": {
+                "parameters": [
+                    {
+                        "name": "customer",
+                        "in": "query",
+                        "description": "The name of the customer to activate",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The updated JWT",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/genericError"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "errorModel": {
+            "type": "object",
+            "required": [
+                "message"
+            ],
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "errors": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    },
+    "responses": {
+        "genericError": {
+            "description": "unexpected error",
+            "schema": {"$ref": "#/definitions/errorModel"}
+        }
+    }
+}

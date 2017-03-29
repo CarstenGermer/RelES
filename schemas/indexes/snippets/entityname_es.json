@@ -1,0 +1,17 @@
+{
+    "dynamic": "strict",
+    "properties": {
+        "officialname": { "type": "string" },
+        "sortname": { "type": "string" },
+        "alternate_names_de": { "type": "string" },
+        "alternate_names_en": { "type": "string" },
+        "alternate_names_fr": { "type": "string" },
+        "alternate_names_it": { "type": "string" },
+        "alternate_names_es": { "type": "string" },
+        "alternate_names_ru": { "type": "string" },
+        "alternate_names_dk": { "type": "string" },
+        "alternate_names_se": { "type": "string" },
+        "alternate_names_cz": { "type": "string" },
+        "alternate_names_tr": { "type": "string" }
+    }
+}
